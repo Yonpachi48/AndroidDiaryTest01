@@ -28,7 +28,7 @@ class LoginSecondActivity : AppCompatActivity() {
                 if (document != null) {
                     Log.d("tag", "DocumentSnapshot data: ${document.data}")
                     binding.loginUserImageView.load(document.data?.get("photoId").toString())
-                    binding.loginUserTextEdit.setText(document.data?.get("name").toString())
+                    binding.loginUserTextView.text = document.data?.get("name").toString()
                 } else {
                     Log.d("tag", "No such document")
                 }
@@ -39,25 +39,15 @@ class LoginSecondActivity : AppCompatActivity() {
 
 
         binding.createGpButton.setOnClickListener {
-
-            val nameText = binding.loginUserTextEdit.text
-
-            if(binding.loginUserTextEdit.text != null) {
-                docRef
-                    .update("name", nameText)
-                    .addOnSuccessListener {
-                        Log.d("tag😀", "😀")
-                    }
-                    .addOnFailureListener { e->
-                        Log.w("tag", "😭", e)
-                    }
-            } else return@setOnClickListener
-
-
-            Log.d("task🧐", "🧐${userId}")
             val toCreateGroupActivityIntent = Intent(this, CreateGroupActivity::class.java)
             toCreateGroupActivityIntent.putExtra("users", userId)
             startActivity(toCreateGroupActivityIntent)
+        }
+
+        binding.joinGpButton.setOnClickListener {
+            val toJoinGroupActivityIntent = Intent(this, JoinGroupActivity::class.java)
+            toJoinGroupActivityIntent.putExtra("users", userId)
+            startActivity(toJoinGroupActivityIntent)
         }
     }
 }

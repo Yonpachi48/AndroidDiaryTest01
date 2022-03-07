@@ -4,11 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_person_pin_circle_24.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_create_group.xml" value="0.20653228759765618" />
+        <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.22056159420289856" />
+        <entry key="app/src/main/res/layout/activity_create_group.xml" value="0.2310379028320312" />
         <entry key="app/src/main/res/layout/activity_join_group.xml" value="0.1609375" />
         <entry key="app/src/main/res/layout/activity_login_screen.xml" value="0.20233612060546877" />
-        <entry key="app/src/main/res/layout/activity_login_second_activitiy.xml" value="0.5105361938476562" />
+        <entry key="app/src/main/res/layout/activity_login_second_activitiy.xml" value="0.20064086914062507" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19269904537477361" />
+        <entry key="app/src/main/res/layout/fragment_room.xml" value="0.22056159420289856" />
       </map>
     </option>
   </component>

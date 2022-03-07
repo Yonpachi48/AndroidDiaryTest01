@@ -27,22 +27,18 @@ class CreateGroupActivity : AppCompatActivity() {
             rName = binding.groupNameEditText.text.toString()
             rId = binding.groupIdEditText.text.toString()
 
-            if (rName != null && rId != null) {
+            if (rName != "" && rId != "") {
                 val room = Room(
                     roomName = rName,
                     roomId = rId,
                     chats = null
                 )
-                db.collection("rooms")
-                    .add(room)
-                    .addOnSuccessListener { documentReference ->
-                        Log.d("tag", "DocumentSnapshot added with ID: ${documentReference.id}")
-                        addRoomId(documentReference.id, userId.toString())
-                        val toMainActivityIntent = Intent(this, MainActivity::class.java)
-                        toMainActivityIntent.putExtra("users", userId)
-                        startActivity(toMainActivityIntent)
-                    }
-            } else return@setOnClickListener
+                checkRooms(room, userId.toString())
+            } else {
+                val dialog = NoneTextFragment()
+                dialog.show(supportFragmentManager, "noneText")
+                return@setOnClickListener
+            }
         }
     }
 
@@ -54,6 +50,36 @@ class CreateGroupActivity : AppCompatActivity() {
             }
             .addOnFailureListener { e->
                 Log.w("tag", "😭", e)
+            }
+    }
+
+    private fun checkRooms(room: Room, userId: String) {
+        db.collection("rooms")
+            .whereEqualTo("roomId",room.roomId)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d("tag", "🏚")
+                    val dialog = RoomFragment()
+                    dialog.show(supportFragmentManager, "room")
+                    return@addOnSuccessListener
+                }
+                addRooms(room, userId)
+            }
+            .addOnFailureListener { e ->
+                Log.w("tag", "😭", )
+            }
+    }
+
+    private fun addRooms(room: Room, userId: String) {
+        db.collection("rooms")
+            .add(room)
+            .addOnSuccessListener { documentReference ->
+                Log.d("tag", "DocumentSnapshot added with ID: ${documentReference.id}")
+                addRoomId(documentReference.id, userId)
+                val toMainActivityIntent = Intent(this, MainActivity::class.java)
+                toMainActivityIntent.putExtra("users", userId)
+                startActivity(toMainActivityIntent)
             }
     }
 }

@@ -102,9 +102,9 @@ class LoginFirstActivity : AppCompatActivity() {
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     Log.d("tag", "${document.id} => ${document.data} 🧐")
-                    var toLoginSecondActivityIntent = Intent(this, LoginSecondActivity::class.java)
-                    toLoginSecondActivityIntent.putExtra("users", document.id)
-                    startActivity(toLoginSecondActivityIntent)
+                    var toCreateGroupActivityIntent = Intent(this, CreateAccountActivity::class.java)
+                    toCreateGroupActivityIntent.putExtra("users", document.id)
+                    startActivity(toCreateGroupActivityIntent)
                     return@addOnSuccessListener
                 }
                 createUser(user)
@@ -119,9 +119,9 @@ class LoginFirstActivity : AppCompatActivity() {
             .add(user)
             .addOnSuccessListener { documentReference ->
                 Log.d(ADD_TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                var toLoginSecondActivityIntent = Intent(this, LoginSecondActivity::class.java)
-                toLoginSecondActivityIntent.putExtra("users", documentReference.id)
-                startActivity(toLoginSecondActivityIntent)
+                var toCreateGroupActivityIntent = Intent(this, CreateGroupActivity::class.java)
+                toCreateGroupActivityIntent.putExtra("users", documentReference.id)
+                startActivity(toCreateGroupActivityIntent)
             }
             .addOnFailureListener { e ->
                 Log.d(ADD_TAG, "Error adding document", e)
