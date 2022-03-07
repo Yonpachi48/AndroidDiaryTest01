@@ -63,12 +63,11 @@ class LoginFirstActivity : AppCompatActivity() {
                 //Googleアカウントの情報が取得できた際の処理
                 if (account != null) {
                     firebaseAuthWithGoogle(account)
-
                     val user = User(
                         uid = auth.currentUser?.uid.toString(),
                         name = auth.currentUser?.displayName.toString(),
                         photoId = auth.currentUser?.photoUrl.toString(),
-                        roomId = null
+                        groupId = null
                     )
                     Log.d(ADD_TAG, "😀")
                     checkUser(user)
@@ -102,9 +101,7 @@ class LoginFirstActivity : AppCompatActivity() {
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     Log.d("tag", "${document.id} => ${document.data} 🧐")
-                    var toCreateGroupActivityIntent = Intent(this, CreateAccountActivity::class.java)
-                    toCreateGroupActivityIntent.putExtra("users", document.id)
-                    startActivity(toCreateGroupActivityIntent)
+                    checkUserGroupId(document.id)
                     return@addOnSuccessListener
                 }
                 createUser(user)
@@ -114,14 +111,33 @@ class LoginFirstActivity : AppCompatActivity() {
             }
     }
 
+    private fun checkUserGroupId(documentId: String) {
+        db.collection("users").document(documentId)
+            .get()
+            .addOnSuccessListener { document ->
+                if(document.data?.get("groupId") != null) {
+                    val toMainActivityIntent = Intent(this, MainActivity::class.java)
+                    toMainActivityIntent.putExtra("users", document.id)
+                    startActivity(toMainActivityIntent)
+                } else {
+                    var toCreateAccountActivityIntent = Intent(this, CreateAccountActivity::class.java)
+                    toCreateAccountActivityIntent.putExtra("users", document.id)
+                    startActivity(toCreateAccountActivityIntent)
+                }
+            }
+            .addOnFailureListener {
+
+            }
+    }
+
     private fun createUser(user: User) {
         db.collection("users")
             .add(user)
             .addOnSuccessListener { documentReference ->
                 Log.d(ADD_TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                var toCreateGroupActivityIntent = Intent(this, CreateGroupActivity::class.java)
-                toCreateGroupActivityIntent.putExtra("users", documentReference.id)
-                startActivity(toCreateGroupActivityIntent)
+                var toCreateAccountActivityIntent = Intent(this, CreateAccountActivity::class.java)
+                toCreateAccountActivityIntent.putExtra("users", documentReference.id)
+                startActivity(toCreateAccountActivityIntent)
             }
             .addOnFailureListener { e ->
                 Log.d(ADD_TAG, "Error adding document", e)

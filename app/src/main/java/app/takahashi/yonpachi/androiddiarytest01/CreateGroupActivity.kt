@@ -11,8 +11,6 @@ import com.google.firebase.ktx.Firebase
 class CreateGroupActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCreateGroupBinding
-    private lateinit var rName: String
-    private lateinit var rId: String
     private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,16 +22,16 @@ class CreateGroupActivity : AppCompatActivity() {
         val userId = intent.getStringExtra("users")
 
         binding.createGroupButton.setOnClickListener {
-            rName = binding.groupNameEditText.text.toString()
-            rId = binding.groupIdEditText.text.toString()
+            val rName = binding.groupNameEditText.text.toString()
+            val rId = binding.groupIdEditText.text.toString()
 
             if (rName != "" && rId != "") {
-                val room = Room(
-                    roomName = rName,
-                    roomId = rId,
+                val group = Group(
+                    groupName = rName,
+                    groupId = rId,
                     chats = null
                 )
-                checkRooms(room, userId.toString())
+                checkGroups(group, userId.toString())
             } else {
                 val dialog = NoneTextFragment()
                 dialog.show(supportFragmentManager, "noneText")
@@ -42,9 +40,9 @@ class CreateGroupActivity : AppCompatActivity() {
         }
     }
 
-    private fun addRoomId(roomId: String, userId: String){
+    private fun addGroupId(groupId: String, userId: String){
         val docUser = db.collection("users").document(userId)
-        docUser.update("roomId", roomId)
+        docUser.update("groupId", groupId)
             .addOnSuccessListener {
                 Log.d("tag", "😀")
             }
@@ -53,30 +51,30 @@ class CreateGroupActivity : AppCompatActivity() {
             }
     }
 
-    private fun checkRooms(room: Room, userId: String) {
-        db.collection("rooms")
-            .whereEqualTo("roomId",room.roomId)
+    private fun checkGroups(group: Group, userId: String) {
+        db.collection("groups")
+            .whereEqualTo("groupId",group.groupId)
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     Log.d("tag", "🏚")
-                    val dialog = RoomFragment()
-                    dialog.show(supportFragmentManager, "room")
+                    val dialog = GroupFragment()
+                    dialog.show(supportFragmentManager, "group")
                     return@addOnSuccessListener
                 }
-                addRooms(room, userId)
+                addGroups(group, userId)
             }
             .addOnFailureListener { e ->
                 Log.w("tag", "😭", )
             }
     }
 
-    private fun addRooms(room: Room, userId: String) {
-        db.collection("rooms")
-            .add(room)
+    private fun addGroups(group: Group, userId: String) {
+        db.collection("groups")
+            .add(group)
             .addOnSuccessListener { documentReference ->
                 Log.d("tag", "DocumentSnapshot added with ID: ${documentReference.id}")
-                addRoomId(documentReference.id, userId)
+                addGroupId(documentReference.id, userId)
                 val toMainActivityIntent = Intent(this, MainActivity::class.java)
                 toMainActivityIntent.putExtra("users", userId)
                 startActivity(toMainActivityIntent)

@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidDiaryTest01">
         <activity
+            android:name=".AddDiaryActivity"
+            android:exported="false" />
+        <activity
             android:name=".JoinGroupActivity"
             android:exported="false" />
         <activity

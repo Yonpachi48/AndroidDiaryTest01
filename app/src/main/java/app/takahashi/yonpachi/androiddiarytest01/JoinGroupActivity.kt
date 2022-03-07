@@ -1,5 +1,6 @@
 package app.takahashi.yonpachi.androiddiarytest01
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,36 +20,50 @@ class JoinGroupActivity : AppCompatActivity() {
         }
 
         val userId = intent.getStringExtra("users")
-        val docUser = db.collection("users").document(userId.toString())
 
-        val groupId = binding.joinGroupIdEditText.text.toString()
         binding.joinGroupButton.setOnClickListener {
+            val groupId = binding.joinGroupIdEditText.text.toString()
             if(groupId != "") {
-                checkGroup(userId.toString())
+                checkGroup(groupId, userId.toString())
+            } else {
+                val dialog = NoneTextFragment()
+                dialog.show(supportFragmentManager, "noneText")
+                return@setOnClickListener
             }
+
+            val toMainActivityIntent = Intent(this, MainActivity::class.java)
+            toMainActivityIntent.putExtra("users", userId)
+            startActivity(toMainActivityIntent)
         }
     }
 
-    private fun checkGroup(groupId: String) {
-        val docUser = db.collection("users")
-        docUser
-            .whereEqualTo("roomId", groupId)
+    private fun checkGroup(groupId: String, userId: String) {
+        val docGroup = db.collection("groups")
+            .whereEqualTo("groupId", groupId)
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
                     Log.d("tag", "🏚")
-
+                    joinGroup(groupId, userId)
+                    return@addOnSuccessListener
                 }
                 val dialog = NoneTextFragment()
                 dialog.show(supportFragmentManager, "group")
             }
-            .addOnFailureListener {
-
+            .addOnFailureListener { e->
+                Log.w("tag", "🤐", e)
             }
     }
 
-    private fun joinGroup(groupId: String) {
-
+    private fun joinGroup(groupId: String, userId: String) {
+        val docUser = db.collection("users").document(userId)
+            .update("groupId", groupId)
+            .addOnSuccessListener {
+                Log.d("tag", "🍳${groupId}")
+            }
+            .addOnFailureListener { e ->
+                Log.w("tag", "😤", e)
+            }
     }
 
 

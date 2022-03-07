@@ -8,5 +8,5 @@ data class User(
     val uid: String = "",
     val name: String = "",
     val photoId: String = "",
-    val roomId: String?
+    val groupId: String?
 )
