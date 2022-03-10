@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import app.takahashi.yonpachi.androiddiarytest01.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         // RecyclerViewの設定
+        val dividerItemDecoration = DividerItemDecoration(this, LinearLayoutManager(this).getOrientation())
+        binding.recyclerView.addItemDecoration(dividerItemDecoration)
         val diaryAdapter = DiaryAdapter()
         binding.recyclerView.adapter = diaryAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

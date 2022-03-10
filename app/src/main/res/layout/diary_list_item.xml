@@ -3,26 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:minHeight="120dp">
-
-    <TextView
-        android:id="@+id/list_user_name_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="4dp"
-        android:text="ユーザーネーム"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/list_user_card_view"
-        app:layout_constraintTop_toTopOf="@id/list_user_card_view" />
+    android:minHeight="100dp"
+    android:paddingTop="22dp"
+    android:paddingBottom="22dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/list_user_card_view"
         android:layout_width="44dp"
         android:layout_height="44dp"
-        android:layout_margin="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +27,18 @@
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/list_user_name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
+        android:text="ユーザーネーム"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/list_user_card_view"
+        app:layout_constraintTop_toTopOf="@id/list_user_card_view" />
 
     <TextView
         android:id="@+id/list_date_text_view"
