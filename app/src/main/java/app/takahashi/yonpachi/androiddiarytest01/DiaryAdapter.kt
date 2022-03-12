@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import app.takahashi.yonpachi.androiddiarytest01.databinding.DiaryListItemBinding
 import coil.api.load
-import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
@@ -59,7 +58,7 @@ class DiaryViewHolder (
                 Log.d("tag", "🥶", e)
             }
 
-        binding.listDateTextView.text = SimpleDateFormat("MM月dd日(E)曜日", Locale.JAPANESE).format(chat.date)
+        binding.listDateTextView.text = SimpleDateFormat("MM月dd日(E)", Locale.JAPANESE).format(chat.date)
         binding.listDiaryTextView.text = chat.content
     }
 }

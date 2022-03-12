@@ -115,6 +115,7 @@ class LoginFirstActivity : AppCompatActivity() {
         db.collection("users").document(documentId)
             .get()
             .addOnSuccessListener { document ->
+                if(document.data?.get("uid") != null)
                 if(document.data?.get("groupId") != null) {
                     val toMainActivityIntent = Intent(this, MainActivity::class.java)
                     toMainActivityIntent.putExtra("users", document.id)

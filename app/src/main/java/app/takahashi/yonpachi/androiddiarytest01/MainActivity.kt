@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         // cellの表示
-        getChats(diaryAdapter)
         updateChats(diaryAdapter)
 
         // cellのクリックイベント
@@ -41,6 +40,10 @@ class MainActivity : AppCompatActivity() {
             object: DiaryAdapter.OnItemClickListener {
                 override fun onClick(view: View, chat: Chat) {
                     val context = view.context
+
+                    val toDetailActivityIntent = Intent(context, DetailActivity::class.java)
+                    toDetailActivityIntent.putExtra("chats", chat.id)
+                    startActivity(toDetailActivityIntent)
 
                 }
             }
