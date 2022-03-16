@@ -59,18 +59,19 @@ class LoginFirstActivity : AppCompatActivity() {
         if (requestCode == RC_GOOGLE_SIGN_IN_CODE){
             var task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                var account = task.result
+                var account = task.getResult(ApiException::class.java)!!
                 //Googleアカウントの情報が取得できた際の処理
                 if (account != null) {
                     firebaseAuthWithGoogle(account)
-                    val user = User(
-                        uid = auth.currentUser?.uid.toString(),
-                        name = auth.currentUser?.displayName.toString(),
-                        photoId = auth.currentUser?.photoUrl.toString(),
-                        groupId = null
-                    )
-                    Log.d(ADD_TAG, "😀")
-                    checkUser(user)
+                    Log.d("userInfo🥑66", auth.currentUser?.uid.toString())
+//                    val user = User(
+//                        uid = auth.currentUser?.uid.toString(),
+//                        name = auth.currentUser?.displayName.toString(),
+//                        photoId = auth.currentUser?.photoUrl.toString(),
+//                        groupId = null
+//                    )
+//                    Log.d(ADD_TAG, "😀")
+//                    checkUser(user)
                 }
             }catch (e : ApiException){
                 Log.d("ApiException", e.toString())
@@ -83,10 +84,18 @@ class LoginFirstActivity : AppCompatActivity() {
 
         var credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth?.signInWithCredential(credential)
-            ?.addOnCompleteListener{
+            ?.addOnCompleteListener(this){
                 //認証成功時の処理
                 if (it.isSuccessful){
                     Log.d("currentUser", auth?.currentUser.toString())
+                    Log.d("userInfo🥑91", auth.currentUser?.uid.toString())
+                    val user = User(
+                        uid = auth.currentUser?.uid.toString(),
+                        name = auth.currentUser?.displayName.toString(),
+                        photoId = auth.currentUser?.photoUrl.toString(),
+                        groupId = null
+                    )
+                    checkUser(user)
                 }//認証失敗時の処理
                 else{
                     // If sign in fails, display a message to the user.
@@ -106,8 +115,8 @@ class LoginFirstActivity : AppCompatActivity() {
                 }
                 createUser(user)
             }
-            .addOnFailureListener {
-                Log.d("AddTag", "😎")
+            .addOnFailureListener { e ->
+                Log.d("AddTag", "😎", e)
             }
     }
 
@@ -115,7 +124,6 @@ class LoginFirstActivity : AppCompatActivity() {
         db.collection("users").document(documentId)
             .get()
             .addOnSuccessListener { document ->
-                if(document.data?.get("uid") != null)
                 if(document.data?.get("groupId") != null) {
                     val toMainActivityIntent = Intent(this, MainActivity::class.java)
                     toMainActivityIntent.putExtra("users", document.id)
@@ -126,8 +134,8 @@ class LoginFirstActivity : AppCompatActivity() {
                     startActivity(toCreateAccountActivityIntent)
                 }
             }
-            .addOnFailureListener {
-
+            .addOnFailureListener { e ->
+                Log.d("userError", "🙋🏻", e)
             }
     }
 

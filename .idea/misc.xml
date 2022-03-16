@@ -3,17 +3,36 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1695" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1695" />
+        <entry key="app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.1695" />
+        <entry key="app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.1695" />
+        <entry key="app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1695" />
         <entry key="app/src/main/res/drawable/ic_baseline_person_pin_circle_24.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1695" />
+        <entry key="app/src/main/res/drawable/ic_menu_camera.xml" value="0.1695" />
+        <entry key="app/src/main/res/drawable/ic_menu_gallery.xml" value="0.1695" />
+        <entry key="app/src/main/res/drawable/shape_rouded_corners_5dp.xml" value="0.2445" />
         <entry key="app/src/main/res/layout/activity_add_diary.xml" value="0.17445678710937498" />
         <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.2793777465820313" />
         <entry key="app/src/main/res/layout/activity_create_group.xml" value="0.2310379028320312" />
-        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.20990600585937502" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_join_group.xml" value="0.1609375" />
+        <entry key="app/src/main/res/layout/activity_login_first_screen.xml" value="0.10125885009765626" />
         <entry key="app/src/main/res/layout/activity_login_screen.xml" value="0.20233612060546877" />
         <entry key="app/src/main/res/layout/activity_login_second_activitiy.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.19269904537477361" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1763031005859375" />
+        <entry key="app/src/main/res/layout/activity_people_navigation.xml" value="0.14413299560546894" />
+        <entry key="app/src/main/res/layout/activity_update_diary.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/app_bar_people_navigation.xml" value="0.2608695652173913" />
+        <entry key="app/src/main/res/layout/content_people_navigation.xml" value="0.1734375" />
+        <entry key="app/src/main/res/layout/content_people_navigation2.xml" value="0.2608695652173913" />
         <entry key="app/src/main/res/layout/diary_list_item.xml" value="0.2628997802734375" />
+        <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.16041666666666668" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.16041666666666668" />
+        <entry key="app/src/main/res/layout/fragment_none_text.xml" value="0.16041666666666668" />
         <entry key="app/src/main/res/layout/fragment_room.xml" value="0.22056159420289856" />
+        <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
       </map>
     </option>
   </component>

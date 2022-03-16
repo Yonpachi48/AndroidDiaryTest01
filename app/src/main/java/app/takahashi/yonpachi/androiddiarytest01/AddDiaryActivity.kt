@@ -43,6 +43,10 @@ class AddDiaryActivity : AppCompatActivity() {
                     .addOnFailureListener { e ->
                         Log.d("tag", "Error adding document🥶", e)
                     }
+            } else {
+                val dialog = NoneTextFragment()
+                dialog.show(supportFragmentManager, "noneText")
+                return@setOnClickListener
             }
 
             finish()

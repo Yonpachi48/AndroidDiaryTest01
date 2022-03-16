@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddDiaryActivity">
+    tools:context=".UpdateDiaryActivity">
+
 
     <TextView
-        android:id="@+id/add_diary_text_view"
+        android:id="@+id/update_diary_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="13dp"
         android:text="日記入力"
-        app:layout_constraintBottom_toTopOf="@id/add_diary_text_edit"
-        app:layout_constraintStart_toStartOf="@id/add_diary_text_edit" />
+        app:layout_constraintBottom_toTopOf="@id/update_diary_text_edit"
+        app:layout_constraintStart_toStartOf="@id/update_diary_text_edit" />
 
     <EditText
-        android:id="@+id/add_diary_text_edit"
+        android:id="@+id/update_diary_text_edit"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -31,25 +32,25 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/add_date_text_view"
+        android:id="@+id/update_date_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:text="日付"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/add_diary_text_view"
+        app:layout_constraintBottom_toTopOf="@+id/update_diary_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_dairy_button"
+        android:id="@+id/update_dairy_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
         android:contentDescription="@string/app_name"
-        app:backgroundTint="@color/material_dynamic_neutral_variant90"
         app:shapeAppearance="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
+        app:backgroundTint="@color/material_dynamic_neutral_variant90"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_check_24" />

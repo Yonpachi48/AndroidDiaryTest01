@@ -6,23 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/topAppBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:title="title"
-            app:titleCentered="true"
-            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-            />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/detail_user_card_view"
         android:layout_width="140dp"
@@ -83,7 +66,8 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:contentDescription="@string/app_name"
-        app:backgroundTint="#C8B697"
+        app:backgroundTint="@color/material_dynamic_neutral_variant90"
+        app:shapeAppearance="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_edit_24" />

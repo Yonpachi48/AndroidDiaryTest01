@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="title"
-            app:navigationIcon="@drawable/ic_baseline_menu_24" />
+            app:titleCentered="true"
+            app:titleTextColor="@color/material_dynamic_neutral_variant40"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -32,14 +33,15 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_margin="16dp"
         android:clickable="true"
         android:contentDescription="@string/app_name"
-        app:backgroundTint="#C8B697"
+        app:backgroundTint="@color/material_dynamic_neutral_variant90"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_add_24" />
+        app:srcCompat="@drawable/ic_baseline_add_24"
+        app:shapeAppearance="@style/ShapeAppearanceOverlay.Material3.FloatingActionButton"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

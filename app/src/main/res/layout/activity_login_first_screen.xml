@@ -10,7 +10,7 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="450dp"
-        android:background="@android:color/holo_orange_light"
+        android:background="@color/material_dynamic_neutral_variant90"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
@@ -32,25 +32,19 @@
             android:layout_marginTop="100dp">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="230dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:src="@drawable/ic_baseline_account_circle_24" />
+                android:layout_marginBottom="70dp"
+                android:src="@drawable/nikky_logo" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Google Login"
-                android:textAlignment="center"
-                android:textSize="32sp" />
+
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp"
+                app:cardCornerRadius="12dp"
                 app:cardElevation="30dp"
                 android:layout_gravity="center"
                 android:layout_margin="50dp"
@@ -62,14 +56,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/black"
-                    android:padding="12dp">
+                    android:padding="10dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    >
 
                     <ImageView
                         android:layout_width="22dp"
                         android:layout_height="22dp"
                         android:layout_gravity="start"
                         android:src="@drawable/google_button"
-                        android:layout_marginEnd="5dp"/>
+                        android:layout_marginEnd="10dp"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -87,15 +84,5 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/sign_out_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="20dp"
-        android:text="Sing out"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
