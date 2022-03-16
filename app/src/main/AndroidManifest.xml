@@ -12,11 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         <activity
-            android:name=".PeopleNavigationActivity"
-            android:exported="false"
-            android:label="@string/title_activity_people_navigation"
-            android:theme="@style/NoActionBar" />
-        <activity
             android:name=".UpdateDiaryActivity"
             android:exported="false" />
         <activity
