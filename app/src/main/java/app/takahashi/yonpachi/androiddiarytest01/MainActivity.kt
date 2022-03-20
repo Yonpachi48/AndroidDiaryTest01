@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         docUser.get()
             .addOnSuccessListener { documentReference ->    // ユーザー情報の使用
                 Log.d("tag1", "${documentReference.id}, ${documentReference.data?.get("groupId").toString()}")
-                getGroup(documentReference.data?.get("groupId").toString())
+                getGroupId(documentReference.data?.get("groupId").toString())
             }
 
         // 追加ボタンアクション
@@ -64,27 +64,36 @@ class MainActivity : AppCompatActivity() {
             toAddDiaryActivityIntent.putExtra("users", userId)
             startActivity(toAddDiaryActivityIntent)
         }
-
-        // メニューボタンアクション
-        binding.topAppBar.setNavigationOnClickListener {
-
-        }
     }
 
     // グループ情報の使用
     private fun getGroup(groupId: String) {
-        db.collection("groups").whereEqualTo("groupId", groupId)
+        Log.d("tag", "groupId:$groupId, 🤢")
+        db.collection("groups").document(groupId)
             .get()
-            .addOnSuccessListener { documents ->
-                val documentCount = 0
-                for (document in documents) {
+            .addOnSuccessListener { document ->
+                Log.d("tag", "🐒, $groupId")
                     Log.d("tag😘", document.id)
                     binding.topAppBar.title = document.data?.get("groupName").toString()
                     return@addOnSuccessListener
-                }
             }
             .addOnFailureListener { e ->
                 Log.w("tag", "😭", e)
+            }
+    }
+
+    private fun getGroupId(groupId: String) {
+        db.collection("groups")
+            .whereEqualTo("groupId", groupId)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d("tag", "documentId: ${document.id}")
+                    getGroup(document.id)
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.d("tag", "groupIdが取得できませんでした", e)
             }
     }
 

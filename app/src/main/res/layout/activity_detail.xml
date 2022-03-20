@@ -51,10 +51,13 @@
     <TextView
         android:id="@+id/detail_diary_text_view"
         android:layout_width="240dp"
-        android:layout_height="wrap_content"
+        android:layout_height="220dp"
         android:layout_marginTop="6dp"
         android:text="文章"
-        android:textSize="12sp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeMaxTextSize="24sp"
+        android:autoSizeStepGranularity="2sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_date_text_view" />

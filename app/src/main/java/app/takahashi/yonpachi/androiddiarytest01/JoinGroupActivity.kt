@@ -24,20 +24,27 @@ class JoinGroupActivity : AppCompatActivity() {
         binding.joinGroupButton.setOnClickListener {
             val groupId = binding.joinGroupIdEditText.text.toString()
             if(groupId != "") {
-                checkGroup(groupId, userId.toString())
+                if (checkGroup(groupId, userId.toString())) {
+                    Log.d("tag" , "グループが見つかりました😇")
+                    val toMainActivityIntent = Intent(this, MainActivity::class.java)
+                    toMainActivityIntent.putExtra("users", userId)
+                    startActivity(toMainActivityIntent)
+                    finish()
+                } else {
+                    Log.d("tag", "グループが見つかりませんでした🤯")
+                    return@setOnClickListener
+                }
             } else {
                 val dialog = NoneTextFragment()
                 dialog.show(supportFragmentManager, "noneText")
                 return@setOnClickListener
             }
 
-            val toMainActivityIntent = Intent(this, MainActivity::class.java)
-            toMainActivityIntent.putExtra("users", userId)
-            startActivity(toMainActivityIntent)
         }
     }
 
-    private fun checkGroup(groupId: String, userId: String) {
+    private fun checkGroup(groupId: String, userId: String): Boolean {
+        var check: Boolean = false
         val docGroup = db.collection("groups")
             .whereEqualTo("groupId", groupId)
             .get()
@@ -45,14 +52,18 @@ class JoinGroupActivity : AppCompatActivity() {
                 for (document in documents) {
                     Log.d("tag", "🏚")
                     joinGroup(groupId, userId)
+                    check = true
                     return@addOnSuccessListener
                 }
-                val dialog = NoneTextFragment()
+                val dialog = NoneGroupFragment()
                 dialog.show(supportFragmentManager, "group")
+                check = false
             }
             .addOnFailureListener { e->
                 Log.w("tag", "🤐", e)
+                check = false
             }
+        return check
     }
 
     private fun joinGroup(groupId: String, userId: String) {

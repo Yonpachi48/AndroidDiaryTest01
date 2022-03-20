@@ -64,14 +64,6 @@ class LoginFirstActivity : AppCompatActivity() {
                 if (account != null) {
                     firebaseAuthWithGoogle(account)
                     Log.d("userInfo🥑66", auth.currentUser?.uid.toString())
-//                    val user = User(
-//                        uid = auth.currentUser?.uid.toString(),
-//                        name = auth.currentUser?.displayName.toString(),
-//                        photoId = auth.currentUser?.photoUrl.toString(),
-//                        groupId = null
-//                    )
-//                    Log.d(ADD_TAG, "😀")
-//                    checkUser(user)
                 }
             }catch (e : ApiException){
                 Log.d("ApiException", e.toString())

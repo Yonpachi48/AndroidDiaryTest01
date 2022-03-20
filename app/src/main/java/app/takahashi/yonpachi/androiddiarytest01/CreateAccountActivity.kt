@@ -57,6 +57,7 @@ class CreateAccountActivity : AppCompatActivity() {
                 dialog.show(supportFragmentManager, "noneText")
                 return@setOnClickListener
             }
+            finish()
         }
     }
 }
