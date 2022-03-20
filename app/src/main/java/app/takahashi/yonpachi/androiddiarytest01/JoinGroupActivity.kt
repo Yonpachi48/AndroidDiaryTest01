@@ -1,9 +1,9 @@
 package app.takahashi.yonpachi.androiddiarytest01
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import app.takahashi.yonpachi.androiddiarytest01.databinding.ActivityJoinGroupBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -24,35 +24,25 @@ class JoinGroupActivity : AppCompatActivity() {
         binding.joinGroupButton.setOnClickListener {
             val groupId = binding.joinGroupIdEditText.text.toString()
             if(groupId != "") {
-                if (checkGroup(groupId, userId.toString())) {
-                    Log.d("tag" , "グループが見つかりました😇")
-                    val toMainActivityIntent = Intent(this, MainActivity::class.java)
-                    toMainActivityIntent.putExtra("users", userId)
-                    startActivity(toMainActivityIntent)
-                    finish()
-                } else {
-                    Log.d("tag", "グループが見つかりませんでした🤯")
-                    return@setOnClickListener
-                }
+                checkGroup(groupId, userId.toString())
             } else {
                 val dialog = NoneTextFragment()
                 dialog.show(supportFragmentManager, "noneText")
-                return@setOnClickListener
             }
-
         }
     }
 
     private fun checkGroup(groupId: String, userId: String): Boolean {
+        Log.d("tag", "$groupId😅")
         var check: Boolean = false
         val docGroup = db.collection("groups")
             .whereEqualTo("groupId", groupId)
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    Log.d("tag", "🏚")
-                    joinGroup(groupId, userId)
                     check = true
+                    Log.d("tag", "🏚, $check")
+                    joinGroup(groupId, userId)
                     return@addOnSuccessListener
                 }
                 val dialog = NoneGroupFragment()
@@ -71,6 +61,10 @@ class JoinGroupActivity : AppCompatActivity() {
             .update("groupId", groupId)
             .addOnSuccessListener {
                 Log.d("tag", "🍳${groupId}")
+                val toMainActivityIntent = Intent(this, MainActivity::class.java)
+                toMainActivityIntent.putExtra("users", userId)
+                toMainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(toMainActivityIntent)
             }
             .addOnFailureListener { e ->
                 Log.w("tag", "😤", e)
